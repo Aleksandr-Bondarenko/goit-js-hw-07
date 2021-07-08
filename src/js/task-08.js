@@ -5,22 +5,6 @@ const refs = {
   boxesEl: document.querySelector("#boxes"),
 };
 
-const getElWidth = (index) => {
-  let elWidth = 30;
-  for (let i = 0; i < index; i += 1) {
-    elWidth += 10;
-  }
-  return elWidth;
-};
-
-const getElHeight = (index) => {
-  let elHeight = 30;
-  for (let i = 0; i < index; i += 1) {
-    elHeight += 10;
-  }
-  return elHeight;
-};
-
 const getRandomNum = (min, max) => {
   return Math.round(Math.random() * (max - min) + min);
 };
@@ -36,9 +20,8 @@ const createBoxes = () => {
     const randomGreenColor = getRandomNum(0, 256);
     const randomBlueColor = getRandomNum(0, 256);
 
-    el.id = "box";
-    el.style.width = `${getElWidth(i)}px`;
-    el.style.height = `${getElHeight(i)}px`;
+    el.style.width = `${30 + 10 * i}px`;
+    el.style.height = el.style.width;
     el.style.backgroundColor = `rgb(${randomRedColor}, ${randomGreenColor}, ${randomBlueColor})`;
     elArr.push(el);
   }
@@ -47,12 +30,7 @@ const createBoxes = () => {
 };
 
 const destroyBoxes = () => {
-  const arrCreateEl = [...document.querySelectorAll("#box")];
-
-  arrCreateEl.map((item) => {
-    return refs.boxesEl.removeChild(item);
-  });
-
+  refs.boxesEl.innerHTML = '';
   refs.inputEl.value = "";
 };
 
